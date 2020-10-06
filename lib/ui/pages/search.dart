@@ -4,6 +4,7 @@ import 'package:Study_Buddy/repositories/searchRepository.dart';
 import 'package:Study_Buddy/ui/widgets/iconWidget.dart';
 import 'package:Study_Buddy/ui/widgets/profile.dart';
 import 'package:Study_Buddy/ui/widgets/userGender.dart';
+import 'package:Study_Buddy/ui/widgets/userSubject.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +28,10 @@ class _SearchState extends State<Search> {
   int difference;
 
   getDifference(GeoPoint userLocation) async {
-    Position position = await Geolocator().getCurrentPosition();
+    //Position position = await Geolocator().getCurrentPosition();
 
-    double location = await Geolocator().distanceBetween(userLocation.latitude,
-        userLocation.longitude, position.latitude, position.longitude);
+    double location = await Geolocator().distanceBetween(37.785834,
+        -122.406417, 37.785834, -122.406417);
 
     difference = location.toInt();
   }
@@ -81,31 +82,30 @@ class _SearchState extends State<Search> {
             );
           } else
             return profileWidget(
-              padding: size.height * 0.035,
+              padding: size.height * 0.04,
               photoHeight: size.height * 0.824,
               photoWidth: size.width * 0.95,
               photo: _user.photo,
-              clipRadius: size.height * 0.02,
+              clipRadius: size.height * 0.04,
               containerHeight: size.height * 0.3,
               containerWidth: size.width * 0.9,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
-                      height: size.height * 0.06,
+                      height: size.height * 0.02,
                     ),
                     Row(
                       children: <Widget>[
-                        userGender(_user.gender),
+                        
                         Expanded(
                           child: Text(
                             " " +
                                 _user.name +
                                 ", " +
-                                (DateTime.now().year - _user.age.toDate().year)
-                                    .toString(),
+                                _user.gender,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: size.height * 0.05),
@@ -115,6 +115,20 @@ class _SearchState extends State<Search> {
                     ),
                     Row(
                       children: <Widget>[
+                        userSubject(_user.subject),
+                        Text(
+                           " " +
+                                _user.subject,
+                                
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: size.height * 0.04),
+                        )
+                      ],
+                    ),
+          
+                    Row(
+                      children: <Widget>[
                         Icon(
                           Icons.location_on,
                           color: Colors.white,
@@ -122,25 +136,25 @@ class _SearchState extends State<Search> {
                         Text(
                           difference != null
                               ? (difference / 1000).floor().toString() +
-                                  "km away"
-                              : "away",
+                                  " km away"
+                              : "0 away",
                           style: TextStyle(color: Colors.white),
                         )
                       ],
                     ),
                     SizedBox(
-                      height: size.height * 0.05,
+                      height: size.height * 0.04,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        iconWidget(EvaIcons.flash, () {}, size.height * 0.04,
-                            Colors.yellow),
+                        iconWidget(EvaIcons.swapOutline, () {}, size.height * 0.04,
+                            Colors.white),
                         iconWidget(Icons.clear, () {
                           _searchBloc
                               .add(PassUserEvent(widget.userId, _user.uid));
-                        }, size.height * 0.08, Colors.blue),
-                        iconWidget(FontAwesomeIcons.solidHeart, () {
+                        }, size.height * 0.08, Colors.yellow[300]),
+                        iconWidget(FontAwesomeIcons.heart, () {
                           _searchBloc.add(
                             SelectUserEvent(
                                 _currentUser.name,
@@ -148,7 +162,7 @@ class _SearchState extends State<Search> {
                                 widget.userId,
                                 _user.uid),
                           );
-                        }, size.height * 0.06, Colors.red),
+                        }, size.height * 0.06, Colors.red[400]),
                         iconWidget(EvaIcons.options2, () {}, size.height * 0.04,
                             Colors.white)
                       ],

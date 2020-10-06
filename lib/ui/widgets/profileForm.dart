@@ -1,11 +1,10 @@
 import 'dart:io';
-
 import 'package:Study_Buddy/bloc/authentication/authentication_bloc.dart';
 import 'package:Study_Buddy/bloc/authentication/authentication_event.dart';
 import 'package:Study_Buddy/bloc/profile/bloc.dart';
 import 'package:Study_Buddy/repositories/userRepository.dart';
-import 'package:Study_Buddy/ui/constants.dart';
 import 'package:Study_Buddy/ui/widgets/gender.dart';
+import 'package:Study_Buddy/ui/widgets/subject.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,7 @@ class ProfileForm extends StatefulWidget {
 class _ProfileFormState extends State<ProfileForm> {
   final TextEditingController _nameController = TextEditingController();
 
-  String gender, interestedIn;
+  String gender, subject;
   DateTime age;
   File photo;
   GeoPoint location;
@@ -39,7 +38,7 @@ class _ProfileFormState extends State<ProfileForm> {
   bool get isFilled =>
       _nameController.text.isNotEmpty &&
       gender != null &&
-      interestedIn != null &&
+      subject != null &&
       photo != null &&
       age != null;
 
@@ -51,7 +50,7 @@ class _ProfileFormState extends State<ProfileForm> {
     Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
-    location = GeoPoint(position.latitude, position.longitude);
+    location = GeoPoint(37.785834, -122.406417);
   }
 
   _onSubmitted() async {
@@ -62,7 +61,7 @@ class _ProfileFormState extends State<ProfileForm> {
           age: age,
           location: location,
           gender: gender,
-          interestedIn: interestedIn,
+          subject: subject,
           photo: photo),
     );
   }
@@ -129,7 +128,7 @@ class _ProfileFormState extends State<ProfileForm> {
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Container(
-              color: backgroundColor,
+              color: Colors.white,
               width: size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -176,7 +175,7 @@ class _ProfileFormState extends State<ProfileForm> {
                         context,
                         showTitleActions: true,
                         minTime: DateTime(1900, 1, 1),
-                        maxTime: DateTime(DateTime.now().year - 19, 1, 1),
+                        maxTime: DateTime(DateTime.now().year - 0, 0, 0),
                         onConfirm: (date) {
                           setState(() {
                             age = date;
@@ -188,11 +187,11 @@ class _ProfileFormState extends State<ProfileForm> {
                     child: Text(
                       "Enter Birthday",
                       style: TextStyle(
-                          color: Colors.white, fontSize: size.width * 0.09),
+                          color: Colors.indigoAccent[200], fontSize: size.width * 0.07),
                     ),
                   ),
                   SizedBox(
-                    height: 10.0,
+                    height: 20.0,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,79 +200,96 @@ class _ProfileFormState extends State<ProfileForm> {
                         padding: EdgeInsets.symmetric(
                             horizontal: size.height * 0.02),
                         child: Text(
-                          "You Are",
+                          "Your Grade",
                           style: TextStyle(
-                              color: Colors.white, fontSize: size.width * 0.09),
+                              color: Colors.indigoAccent[200], fontSize: size.width * 0.07),
                         ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           genderWidget(
-                              FontAwesomeIcons.venus, "Female", size, gender,
+                              FontAwesomeIcons.checkCircle, "9th", size, gender,
                               () {
                             setState(() {
-                              gender = "Female";
+                              gender = "9th";
                             });
                           }),
                           genderWidget(
-                              FontAwesomeIcons.mars, "Male", size, gender, () {
+                              FontAwesomeIcons.checkCircle, "10th", size, gender, () {
                             setState(() {
-                              gender = "Male";
+                              gender = "10th";
+                            });
+                          }),
+                           genderWidget(
+                              FontAwesomeIcons.checkCircle, "11th", size, gender, () {
+                            setState(() {
+                              gender = "11th";
                             });
                           }),
                           genderWidget(
-                            FontAwesomeIcons.transgender,
-                            "Transgender",
+                            FontAwesomeIcons.checkCircle,
+                            "12th",
                             size,
                             gender,
                             () {
                               setState(
                                 () {
-                                  gender = "Transgender";
+                                  gender = "12th";
                                 },
                               );
                             },
                           ),
                         ],
                       ),
+                      
                       SizedBox(
                         height: size.height * 0.02,
                       ),
+
+
+
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: size.height * 0.02),
                         child: Text(
-                          "Looking For",
+                          "Subject",
                           style: TextStyle(
-                              color: Colors.white, fontSize: size.width * 0.09),
+                              color: Colors.indigoAccent[200], fontSize: size.width * 0.07),
                         ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          genderWidget(FontAwesomeIcons.venus, "Female", size,
-                              interestedIn, () {
+                          subjectWidget(FontAwesomeIcons.plus, "Math", size,
+                              subject, () {
                             setState(() {
-                              interestedIn = "Female";
+                              subject = "Math";
                             });
                           }),
-                          genderWidget(
-                              FontAwesomeIcons.mars, "Male", size, interestedIn,
+                          subjectWidget(
+                              FontAwesomeIcons.flask, "Science", size, subject,
                               () {
                             setState(() {
-                              interestedIn = "Male";
+                              subject = "Science";
                             });
                           }),
-                          genderWidget(
-                            FontAwesomeIcons.transgender,
-                            "Transgender",
+                          subjectWidget(
+                              FontAwesomeIcons.book, "English", size, subject,
+                              () {
+                            setState(() {
+                              subject = "English";
+                            });
+                          }),
+                          subjectWidget(
+                            FontAwesomeIcons.globe,
+                            "History",
                             size,
-                            interestedIn,
+                            subject,
                             () {
                               setState(
                                 () {
-                                  interestedIn = "Transgender";
+                                  subject = "History";
                                 },
                               );
                             },
@@ -295,8 +311,8 @@ class _ProfileFormState extends State<ProfileForm> {
                         height: size.height * 0.06,
                         decoration: BoxDecoration(
                           color: isButtonEnabled(state)
-                              ? Colors.white
-                              : Colors.grey,
+                              ? Colors.indigoAccent[200]
+                              : Colors.indigoAccent[100],
                           borderRadius:
                               BorderRadius.circular(size.height * 0.05),
                         ),
@@ -305,7 +321,7 @@ class _ProfileFormState extends State<ProfileForm> {
                           "Save",
                           style: TextStyle(
                               fontSize: size.height * 0.025,
-                              color: Colors.blue),
+                              color: Colors.white),
                         )),
                       ),
                     ),
@@ -328,12 +344,12 @@ Widget textFieldWidget(controller, text, size) {
       decoration: InputDecoration(
         labelText: text,
         labelStyle:
-            TextStyle(color: Colors.white, fontSize: size.height * 0.03),
+            TextStyle(color: Colors.indigoAccent[200], fontSize: size.height * 0.03),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 1.0),
+          borderSide: BorderSide(color: Colors.indigoAccent[200], width: 1.0),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 1.0),
+          borderSide: BorderSide(color: Colors.indigoAccent[200], width: 1.0),
         ),
       ),
     ),

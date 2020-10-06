@@ -99,7 +99,7 @@ class _SignUpFormState extends State<SignUpForm> {
               return SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Container(
-                  color: backgroundColor,
+                  color: Colors.white,
                   width: size.width,
                   height: size.height,
                   child: Column(
@@ -107,9 +107,9 @@ class _SignUpFormState extends State<SignUpForm> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Center(
-                        child: Text("Study Buddy", style: 
-                        TextStyle(fontSize: size.width*0.2, color: Colors.white),
-                        ),
+                        child: Text("Sign Up", style: TextStyle(
+                          fontSize: size.width * 0.13, color: Colors.grey[700], fontWeight: FontWeight.w300),
+                    ),
                       ),
                       Container(
                         width: size.width *.8,
@@ -129,15 +129,15 @@ class _SignUpFormState extends State<SignUpForm> {
                           decoration: InputDecoration(
                             labelText: "Email",
                             labelStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: size.height * 0.03
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 1.0),
-                            ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 1.0),
-                            ),
+                            color: Colors.grey[700], fontSize: size.height * 0.03),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey[800], width: .7),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey[800], width: .7),
+                        ),
                           ),
                         ),
                       ),
@@ -155,15 +155,15 @@ class _SignUpFormState extends State<SignUpForm> {
                           decoration: InputDecoration(
                             labelText: "Password",
                             labelStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: size.height * 0.03
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 1.0),
-                            ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 1.0),
-                            ),
+                            color: Colors.grey[700], fontSize: size.height * 0.03),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey[800], width: .7),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey[800], width: .7),
+                        ),
                           ),
                         ),
                       ),
@@ -176,7 +176,7 @@ class _SignUpFormState extends State<SignUpForm> {
                             width: size.width *0.8,
                             height: size.height *.06,
                             decoration: BoxDecoration( 
-                              color: isSignUpButtonEnabled(state) ? Colors.white: Colors.grey,
+                              color: isSignUpButtonEnabled(state) ? Colors.indigoAccent[200]: Colors.indigoAccent[100],
                               borderRadius: BorderRadius.circular(size.height * .05),
                             ),
                             child: Center(
@@ -184,7 +184,7 @@ class _SignUpFormState extends State<SignUpForm> {
                                 "Sign Up", 
                                 style: TextStyle( 
                                   fontSize: size.height * .025,
-                                  color: Colors.blue
+                                  color: Colors.white
                                 ),
                               ),
                             ),

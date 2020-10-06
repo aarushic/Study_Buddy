@@ -18,12 +18,12 @@ class Login extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Welcome",
-          style: TextStyle(fontSize: 36.0),
+          "Study Buddy",
+          style: TextStyle(fontSize: 20.0),
         ),
         centerTitle: true,
-        backgroundColor: backgroundColor,
-        elevation: 0,
+        backgroundColor: Colors.indigoAccent[200],
+        elevation: 2,
       ),
       body: BlocProvider<LoginBloc>(
         create: (context) => LoginBloc(

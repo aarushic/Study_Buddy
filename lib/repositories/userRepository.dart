@@ -8,9 +8,9 @@ class UserRepository {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firestore;
 
-  UserRepository({FirebaseAuth firebaseAuth, Firestore firestore})
+  UserRepository({FirebaseAuth firebaseAuth, FirebaseFirestore firestore})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _firestore = firestore ?? Firestore.instance;
+        _firestore = firestore ?? FirebaseFirestore.instance;
 
   Future<void> signInWithEmail(String email, String password) {
     return _firebaseAuth.signInWithEmailAndPassword(
@@ -55,7 +55,7 @@ class UserRepository {
       String userId,
       String name,
       String gender,
-      String interestedIn,
+      String subject,
       DateTime age,
       GeoPoint location) async {
     StorageUploadTask storageUploadTask;
@@ -74,7 +74,7 @@ class UserRepository {
           'name': name,
           "location": location,
           'gender': gender,
-          'interestedIn': interestedIn,
+          'subject': subject,
           'age': age
         });
       });

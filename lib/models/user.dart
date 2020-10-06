@@ -4,12 +4,12 @@ class User {
   String uid;
   String name;
   String gender;
-  String interestedIn;
+  String subject;
   String photo;
   Timestamp age;
   GeoPoint location;
 
-  User({this.uid, this.name, this.gender, this.interestedIn, this.photo, 
+  User({this.uid, this.name, this.gender, this.subject, this.photo, 
   this.age, this.location});
 
 }

@@ -3,22 +3,28 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 Widget userGender(gender) {
   switch (gender) {
-    case 'Male':
+    case '9th':
       return Icon(
-        FontAwesomeIcons.mars,
-        color: Colors.white,
+        FontAwesomeIcons.checkCircle,
+        color: Colors.grey[600],
       );
       break;
-    case 'Female':
+    case '10th':
       return Icon(
-        FontAwesomeIcons.venus,
-        color: Colors.white,
+        FontAwesomeIcons.checkCircle,
+        color: Colors.grey[600],
       );
       break;
-    case 'Transgender':
+    case '11th':
       return Icon(
-        FontAwesomeIcons.transgender,
-        color: Colors.white,
+        FontAwesomeIcons.checkCircle,
+        color: Colors.grey[600],
+      );
+      break;
+    case '12th':
+      return Icon(
+        FontAwesomeIcons.checkCircle,
+        color: Colors.grey[600],
       );
       break;
     default:

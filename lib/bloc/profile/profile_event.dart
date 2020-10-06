@@ -47,14 +47,15 @@ class GenderChanged extends ProfileEvent {
   List<Object> get props => [gender];
 }
 
-class InterestedInChanged extends ProfileEvent {
-  final String interestedIn;
+class SubjectChanged extends ProfileEvent {
+  final String subject;
 
-  InterestedInChanged({@required this.interestedIn});
+  SubjectChanged({@required this.subject});
 
   @override
-  List<Object> get props => [interestedIn];
+  List<Object> get props => [subject];
 }
+
 
 class LocationChanged extends ProfileEvent {
   final GeoPoint location;
@@ -66,7 +67,7 @@ class LocationChanged extends ProfileEvent {
 }
 
 class Submitted extends ProfileEvent {
-  final String name, gender, interestedIn;
+  final String name, gender, subject;
   final DateTime age;
   final GeoPoint location;
   final File photo;
@@ -74,11 +75,11 @@ class Submitted extends ProfileEvent {
   Submitted(
       {@required this.name,
       @required this.gender,
-      @required this.interestedIn,
+      @required this.subject,
       @required this.age,
       @required this.location,
       @required this.photo});
 
   @override
-  List<Object> get props => [location, name, age, gender, interestedIn, photo];
+  List<Object> get props => [location, name, age, gender, subject, photo];
 }

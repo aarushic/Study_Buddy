@@ -31,8 +31,8 @@ class _MatchesState extends State<Matches> {
   getDifference(GeoPoint userLocation) async {
     Position position = await Geolocator().getCurrentPosition();
 
-    double location = await Geolocator().distanceBetween(userLocation.latitude,
-        userLocation.longitude, position.latitude, position.longitude);
+    double location = await Geolocator().distanceBetween(37.785834,
+        userLocation.longitude, 37.785834, position.longitude);
 
     difference = location.toInt();
   }
@@ -82,7 +82,7 @@ class _MatchesState extends State<Matches> {
                           return GestureDetector(
                             onTap: () async {
                               User selectedUser = await matchesRepository
-                                  .getUserDetails(user[index].documentID);
+                                  .getUserDetails(user[index].id);
                               User currentUser = await matchesRepository
                                   .getUserDetails(widget.userId);
                               await getDifference(selectedUser.location);
@@ -336,7 +336,7 @@ class _MatchesState extends State<Matches> {
                                                     ),
                                                     iconWidget(
                                                         FontAwesomeIcons
-                                                            .solidHeart, () {
+                                                            .heart, () {
                                                       _matchesBloc.add(
                                                         AcceptUserEvent(
                                                             selectedUser:

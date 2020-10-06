@@ -5,6 +5,7 @@ import 'package:Study_Buddy/ui/pages/messages.dart';
 import 'package:Study_Buddy/ui/pages/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../constants.dart';
 
@@ -29,7 +30,7 @@ class Tabs extends StatelessWidget {
 
     return Theme(
       data: ThemeData(
-        primaryColor: backgroundColor,
+        primaryColor: Colors.indigoAccent[100],
         accentColor: Colors.white,
       ),
       child: DefaultTabController(
@@ -38,8 +39,8 @@ class Tabs extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              "Chill",
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+              "Study Buddy",
+              style: TextStyle(fontSize: 25.0),
             ),
             actions: <Widget>[
               IconButton(
@@ -61,7 +62,7 @@ class Tabs extends StatelessWidget {
                       tabs: <Widget>[
                         Tab(icon: Icon(Icons.search)),
                         Tab(icon: Icon(Icons.people)),
-                        Tab(icon: Icon(Icons.message)),
+                        Tab(icon: Icon(Icons.chat)),
                       ],
                     )
                   ],

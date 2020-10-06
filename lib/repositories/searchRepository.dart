@@ -1,6 +1,5 @@
 import 'package:Study_Buddy/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class SearchRepository {
   final FirebaseFirestore _firestore;
@@ -57,9 +56,10 @@ class SearchRepository {
 
     await _firestore.collection('users').doc(userId).get().then((user) {
       currentUser.name = user.data()['name'];
+      currentUser.name = user.data()['id'];
       currentUser.photo = user.data()['photoUrl'];
       currentUser.gender = user.data()['gender'];
-      currentUser.interestedIn = user.data()['interestedIn'];
+      currentUser.subject = user.data()['subject']; 
     });
     return currentUser;
   }
@@ -90,15 +90,15 @@ class SearchRepository {
       for (var user in users.docs) {
         if ((!chosenList.contains(user.id)) &&
             (user.id != userId) &&
-            (currentUser.interestedIn == user.data()['gender']) &&
-            (user.data()['interestedIn'] == currentUser.gender)) {
+            (currentUser.subject == user.data()['subject']) &&
+            (user.data()['subject'] == currentUser.subject)) {
           _user.uid = user.id;
-          _user.name = user.data()['name'];
-          _user.photo = user.data()['photoUrl'];
-          _user.age = user.data()['age'];
-          _user.location = user.data()['location'];
-          _user.gender = user.data()['gender'];
-          _user.interestedIn = user.data()['interestedIn'];
+          _user.name = user.get('name');
+          _user.photo = user.get('photoUrl');
+          _user.age =  user.get('age');
+          _user.location = user.get('location');
+          _user.gender = user.get('gender');
+          _user.subject = user.get('subject');
           break;
         }
       }

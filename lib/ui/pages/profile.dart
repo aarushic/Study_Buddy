@@ -21,7 +21,7 @@ class Profile extends StatelessWidget {
       appBar: AppBar(
         title: Text("Profile Setup"),
         centerTitle: true,
-        backgroundColor: backgroundColor,
+        backgroundColor: Colors.indigoAccent[100],
         elevation: 0,
       ),
       body: BlocProvider<ProfileBloc>(

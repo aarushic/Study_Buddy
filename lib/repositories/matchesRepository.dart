@@ -27,13 +27,14 @@ class MatchesRepository {
     User _user = User();
 
     await _firestore.collection('users').doc(userId).get().then((user) {
+      var identifier = user.data();
       _user.uid = user.id;
-      _user.name = user.data()['name'];
-      _user.photo = user.data()['photoUrl'];
-      _user.age = user.data()['age'];
-      _user.location = user.data()['location'];
-      _user.gender = user.data()['gender'];
-      _user.interestedIn = user.data()['interestedIn'];
+      _user.name = identifier['name'];
+      _user.photo = identifier['photoUrl'];
+      _user.age = identifier['age'];
+      _user.location = identifier['location'];
+      _user.gender = identifier['gender'];
+      _user.subject = identifier['subject'];
     });
 
     return _user;

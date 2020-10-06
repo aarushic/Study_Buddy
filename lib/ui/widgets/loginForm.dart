@@ -117,7 +117,7 @@ class _LoginFormState extends State<LoginForm> {
         builder: (context, state) {
           return SingleChildScrollView(
             child: Container(
-              color: backgroundColor,
+              color: Colors.white,
               width: size.width,
               height: size.height,
               child: Column(
@@ -126,9 +126,10 @@ class _LoginFormState extends State<LoginForm> {
                 children: <Widget>[
                   Center(
                     child: Text(
-                      "Chill",
+                      "Welcome!",
+                      
                       style: TextStyle(
-                          fontSize: size.width * 0.2, color: Colors.white),
+                          fontSize: size.width * 0.13, color: Colors.grey[700], fontWeight: FontWeight.w300),
                     ),
                   ),
                   Container(
@@ -149,14 +150,14 @@ class _LoginFormState extends State<LoginForm> {
                       decoration: InputDecoration(
                         labelText: "Email",
                         labelStyle: TextStyle(
-                            color: Colors.white, fontSize: size.height * 0.03),
+                            color: Colors.grey[700], fontSize: size.height * 0.03),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.white, width: 1.0),
+                              BorderSide(color: Colors.grey[800], width: .7),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.white, width: 1.0),
+                              BorderSide(color: Colors.grey[800], width: .7),
                         ),
                       ),
                     ),
@@ -176,14 +177,14 @@ class _LoginFormState extends State<LoginForm> {
                       decoration: InputDecoration(
                         labelText: "Password",
                         labelStyle: TextStyle(
-                            color: Colors.white, fontSize: size.height * 0.03),
+                            color: Colors.grey[700], fontSize: size.height * 0.03),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.white, width: 1.0),
+                              BorderSide(color: Colors.grey[800], width: .7),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.white, width: 1.0),
+                              BorderSide(color: Colors.grey[800], width: .7),
                         ),
                       ),
                     ),
@@ -201,8 +202,8 @@ class _LoginFormState extends State<LoginForm> {
                             height: size.height * 0.06,
                             decoration: BoxDecoration(
                               color: isLoginButtonEnabled(state)
-                                  ? Colors.white
-                                  : Colors.grey,
+                                  ? Colors.indigoAccent[200]
+                                  : Colors.indigoAccent[100],
                               borderRadius:
                                   BorderRadius.circular(size.height * 0.05),
                             ),
@@ -211,7 +212,7 @@ class _LoginFormState extends State<LoginForm> {
                                 "Login",
                                 style: TextStyle(
                                     fontSize: size.height * 0.025,
-                                    color: Colors.blue),
+                                    color: Colors.white),
                               ),
                             ),
                           ),
@@ -232,10 +233,10 @@ class _LoginFormState extends State<LoginForm> {
                             );
                           },
                           child: Text(
-                            "Are you new? Get an Account",
+                            "Are you new? Sign up!",
                             style: TextStyle(
                                 fontSize: size.height * 0.025,
-                                color: Colors.white),
+                                color: Colors.indigoAccent[400]),
                           ),
                         )
                       ],

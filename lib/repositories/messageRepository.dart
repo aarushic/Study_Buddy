@@ -36,7 +36,7 @@ class MessageRepository {
       _user.age = user.data()['age'];
       _user.location = user.data()['location'];
       _user.gender = user.data()['gender'];
-      _user.interestedIn = user.data()['interestedIn'];
+      _user.subject = user.data()['subject'];
     });
     return _user;
   }

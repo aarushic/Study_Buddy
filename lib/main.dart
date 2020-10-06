@@ -10,15 +10,18 @@ import 'bloc/authentication/authentication_bloc.dart';
 
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-
+  
+WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp();
   final UserRepository _userRepository = UserRepository();
-  BlocSupervisor.delegate= SimpleBlocDelegate();
-  runApp(BlocProvider(
-      create:(context) => AuthenticationBloc(userRepository: _userRepository) ..add(AppStarted()),
 
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+
+  runApp(BlocProvider(
+      create: (context) => AuthenticationBloc(userRepository: _userRepository)
+        ..add(AppStarted()),
       child: Home(userRepository: _userRepository))
   );
- 
 }
+
+

@@ -18,8 +18,8 @@ Widget profileWidget(
           BoxShadow(
             color: Colors.black54,
             blurRadius: 5.0,
-            spreadRadius: 2.0,
-            offset: Offset(10.0, 10.0),
+            spreadRadius: 0.5,
+            offset: Offset(0, 0),
           )
         ],
         borderRadius: BorderRadius.circular(clipRadius),

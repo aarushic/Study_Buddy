@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget genderWidget(icon, text, size, selected, onTap){ 
+Widget subjectWidget(icon, text, size, selected, onTap){ 
   return GestureDetector(
     onTap: onTap,
     child: Column( 
