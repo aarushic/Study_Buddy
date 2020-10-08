@@ -1,8 +1,9 @@
-import 'package:Study_Buddy/bloc/search/bloc.dart';
+import 'dart:async';
+import 'package:bloc/bloc.dart';
 import 'package:Study_Buddy/models/user.dart';
 import 'package:Study_Buddy/repositories/searchRepository.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import './bloc.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchRepository _searchRepository;

@@ -2,32 +2,32 @@ import 'package:Study_Buddy/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SearchRepository {
-  final FirebaseFirestore _firestore;
+  final Firestore _firestore;
 
-  SearchRepository({FirebaseFirestore firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  SearchRepository({Firestore firestore})
+      : _firestore = firestore ?? Firestore.instance;
 
   Future<User> chooseUser(currentUserId, selectedUserId, name, photoUrl) async {
     await _firestore
         .collection('users')
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('chosenList')
-        .doc(selectedUserId)
-        .set({});
+        .document(selectedUserId)
+        .setData({});
 
     await _firestore
         .collection('users')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .collection('chosenList')
-        .doc(currentUserId)
-        .set({});
+        .document(currentUserId)
+        .setData({});
 
     await _firestore
         .collection('users')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .collection('selectedList')
-        .doc(currentUserId)
-        .set({
+        .document(currentUserId)
+        .setData({
       'name': name,
       'photoUrl': photoUrl,
     });
@@ -37,29 +37,28 @@ class SearchRepository {
   passUser(currentUserId, selectedUserId) async {
     await _firestore
         .collection('users')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .collection('chosenList')
-        .doc(currentUserId)
-        .set({});
+        .document(currentUserId)
+        .setData({});
 
     await _firestore
         .collection('users')
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('chosenList')
-        .doc(selectedUserId)
-        .set({});
+        .document(selectedUserId)
+        .setData({});
     return getUser(currentUserId);
   }
 
   Future getUserInterests(userId) async {
     User currentUser = User();
 
-    await _firestore.collection('users').doc(userId).get().then((user) {
-      currentUser.name = user.data()['name'];
-      currentUser.name = user.data()['id'];
-      currentUser.photo = user.data()['photoUrl'];
-      currentUser.gender = user.data()['gender'];
-      currentUser.subject = user.data()['subject']; 
+    _firestore.collection('users').document(userId).get().then((user) {
+      currentUser.name = user['name'];
+      currentUser.photo = user['photoUrl'];
+      currentUser.gender = user['gender'];
+      currentUser.subject = user['subject'];
     });
     return currentUser;
   }
@@ -68,13 +67,13 @@ class SearchRepository {
     List<String> chosenList = [];
     await _firestore
         .collection('users')
-        .doc(userId)
+        .document(userId)
         .collection('chosenList')
-        .get()
+        .getDocuments()
         .then((docs) {
-      for (var doc in docs.docs) {
-        if (docs.docs != null) {
-          chosenList.add(doc.id);
+      for (var doc in docs.documents) {
+        if (docs.documents != null) {
+          chosenList.add(doc.documentID);
         }
       }
     });
@@ -86,19 +85,18 @@ class SearchRepository {
     List<String> chosenList = await getChosenList(userId);
     User currentUser = await getUserInterests(userId);
 
-    await _firestore.collection('users').get().then((users) {
-      for (var user in users.docs) {
-        if ((!chosenList.contains(user.id)) &&
-            (user.id != userId) &&
-            (currentUser.subject == user.data()['subject']) &&
-            (user.data()['subject'] == currentUser.subject)) {
-          _user.uid = user.id;
-          _user.name = user.get('name');
-          _user.photo = user.get('photoUrl');
-          _user.age =  user.get('age');
-          _user.location = user.get('location');
-          _user.gender = user.get('gender');
-          _user.subject = user.get('subject');
+    await _firestore.collection('users').getDocuments().then((users) {
+      for (var user in users.documents) {
+          if ((!chosenList.contains(user.documentID)) &&
+            (user.documentID != userId) &&
+            (currentUser.gender == user['gender'])) {
+          _user.uid = user.documentID;
+          _user.name = user['name'];
+          _user.photo = user['photoUrl'];
+          _user.age = user['age'];
+          _user.location = user['location'];
+          _user.gender = user['gender'];
+          _user.subject = user['subject'];
           break;
         }
       }

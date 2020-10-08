@@ -3,15 +3,15 @@ import 'package:Study_Buddy/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MessageRepository {
-  final FirebaseFirestore _firestore;
+  final Firestore _firestore;
 
-  MessageRepository({FirebaseFirestore firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  MessageRepository({Firestore firestore})
+      : _firestore = firestore ?? Firestore.instance;
 
   Stream<QuerySnapshot> getChats({userId}) {
     return _firestore
         .collection('users')
-        .doc(userId)
+        .document(userId)
         .collection('chats')
         .orderBy('timestamp', descending: true)
         .snapshots();
@@ -20,23 +20,23 @@ class MessageRepository {
   Future deleteChat({currentUserId, selectedUserId}) async {
     await _firestore
         .collection('users')
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('chats')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .delete();
   }
 
   Future<User> getUserDetail({userId}) async {
     User _user = User();
 
-    await _firestore.collection('users').doc(userId).get().then((user) {
-      _user.uid = user.id;
-      _user.name = user.data()['name'];
-      _user.photo = user.data()['photoUrl'];
-      _user.age = user.data()['age'];
-      _user.location = user.data()['location'];
-      _user.gender = user.data()['gender'];
-      _user.subject = user.data()['subject'];
+    await _firestore.collection('users').document(userId).get().then((user) {
+      _user.uid = user.documentID;
+      _user.name = user['name'];
+      _user.photo = user['photoUrl'];
+      _user.age = user['age'];
+      _user.location = user['location'];
+      _user.gender = user['gender'];
+      _user.subject = user['subject'];
     });
     return _user;
   }
@@ -46,9 +46,9 @@ class MessageRepository {
 
     await _firestore
         .collection('users')
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('chats')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .collection('messages')
         .orderBy('timestamp', descending: true)
         .snapshots()
@@ -56,12 +56,12 @@ class MessageRepository {
         .then((doc) async {
       await _firestore
           .collection('messages')
-          .doc(doc.docs.first.id)
+          .document(doc.documents.first.documentID)
           .get()
           .then((message) {
-        _message.text = message.data()['text'];
-        _message.photoUrl = message.data()['photoUrl'];
-        _message.timestamp = message.data()['timestamp'];
+         _message.text = message['text'];
+        _message.photoUrl = message['photoUrl'];
+        _message.timestamp = message['timestamp'];
       });
     });
 

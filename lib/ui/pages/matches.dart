@@ -31,8 +31,8 @@ class _MatchesState extends State<Matches> {
   getDifference(GeoPoint userLocation) async {
     Position position = await Geolocator().getCurrentPosition();
 
-    double location = await Geolocator().distanceBetween(37.785834,
-        userLocation.longitude, 37.785834, position.longitude);
+    double location = await Geolocator().distanceBetween(userLocation.latitude,
+        userLocation.longitude, position.latitude, position.longitude);
 
     difference = location.toInt();
   }
@@ -73,8 +73,8 @@ class _MatchesState extends State<Matches> {
                       child: Container(),
                     );
                   }
-                  if (snapshot.data.docs != null) {
-                    final user = snapshot.data.docs;
+                  if (snapshot.data.documents != null) {
+                    final user = snapshot.data.documents;
 
                     return SliverGrid(
                       delegate: SliverChildBuilderDelegate(
@@ -82,7 +82,7 @@ class _MatchesState extends State<Matches> {
                           return GestureDetector(
                             onTap: () async {
                               User selectedUser = await matchesRepository
-                                  .getUserDetails(user[index].id);
+                                  .getUserDetails(user[index].documentID);
                               User currentUser = await matchesRepository
                                   .getUserDetails(widget.userId);
                               await getDifference(selectedUser.location);
@@ -186,14 +186,14 @@ class _MatchesState extends State<Matches> {
                             },
                             child: profileWidget(
                               padding: size.height * 0.01,
-                              photo: user[index].data()['photoUrl'],
+                              photo: user[index].data['photoUrl'],
                               photoWidth: size.width * 0.5,
                               photoHeight: size.height * 0.3,
                               clipRadius: size.height * 0.01,
                               containerHeight: size.height * 0.03,
                               containerWidth: size.width * 0.5,
                               child: Text(
-                                "  " + user[index].data()['name'],
+                                "  " + user[index].data['name'],
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -228,15 +228,15 @@ class _MatchesState extends State<Matches> {
                       child: Container(),
                     );
                   }
-                  if (snapshot.data.docs != null) {
-                    final user = snapshot.data.docs;
+                  if (snapshot.data.documents != null) {
+                    final user = snapshot.data.documents;
                     return SliverGrid(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
                           return GestureDetector(
                             onTap: () async {
                               User selectedUser = await matchesRepository
-                                  .getUserDetails(user[index].id);
+                                  .getUserDetails(user[index].documentID);
                               User currentUser = await matchesRepository
                                   .getUserDetails(widget.userId);
 
@@ -336,7 +336,7 @@ class _MatchesState extends State<Matches> {
                                                     ),
                                                     iconWidget(
                                                         FontAwesomeIcons
-                                                            .heart, () {
+                                                            .solidHeart, () {
                                                       _matchesBloc.add(
                                                         AcceptUserEvent(
                                                             selectedUser:
@@ -375,14 +375,14 @@ class _MatchesState extends State<Matches> {
                             },
                             child: profileWidget(
                               padding: size.height * 0.01,
-                              photo: user[index].data()['photoUrl'],
+                              photo: user[index].data['photoUrl'],
                               photoWidth: size.width * 0.5,
                               photoHeight: size.height * 0.3,
                               clipRadius: size.height * 0.01,
                               containerHeight: size.height * 0.03,
                               containerWidth: size.width * 0.5,
                               child: Text(
-                                "  " + user[index].data()['name'],
+                                "  " + user[index].data['name'],
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),

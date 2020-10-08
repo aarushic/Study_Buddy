@@ -2,116 +2,135 @@ import 'package:Study_Buddy/models/message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
+
 class MessagingRepository {
-final FirebaseFirestore _firestore;
-final FirebaseStorage _firebaseStorage;
-String uuid = Uuid().v4();
-MessagingRepository({FirebaseStorage firebaseStorage, FirebaseFirestore firestore})
-: _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance,
-        _firestore = firestore ?? FirebaseFirestore.instance;
-Future sendMessage({Message message}) async {
-StorageUploadTask storageUploadTask;
-DocumentReference messageRef = _firestore.collection('messages').doc();
-CollectionReference senderRef = _firestore
+  final Firestore _firestore;
+  final FirebaseStorage _firebaseStorage;
+  String uuid = Uuid().v4();
+
+  MessagingRepository({FirebaseStorage firebaseStorage, Firestore firestore})
+      : _firebaseStorage = firebaseStorage ?? FirebaseStorage.instance,
+        _firestore = firestore ?? Firestore.instance;
+
+  Future sendMessage({Message message}) async {
+    StorageUploadTask storageUploadTask;
+    DocumentReference messageRef = _firestore.collection('messages').document();
+    CollectionReference senderRef = _firestore
         .collection('users')
-        .doc(message.senderId)
+        .document(message.senderId)
         .collection('chats')
-        .doc(message.selectedUserId)
+        .document(message.selectedUserId)
         .collection('messages');
-CollectionReference sendUserRef = _firestore
+
+    CollectionReference sendUserRef = _firestore
         .collection('users')
-        .doc(message.selectedUserId)
+        .document(message.selectedUserId)
         .collection('chats')
-        .doc(message.senderId)
+        .document(message.senderId)
         .collection('messages');
-if (message.photo != null) {
-StorageReference photoRef = _firebaseStorage
+
+    if (message.photo != null) {
+      StorageReference photoRef = _firebaseStorage
           .ref()
           .child('messages')
-          .child(messageRef.id)
+          .child(messageRef.documentID)
           .child(uuid);
+
       storageUploadTask = photoRef.putFile(message.photo);
-await storageUploadTask.onComplete.then((photo) async {
-await photo.ref.getDownloadURL().then((photoUrl) async {
-await messageRef.set({
-'senderName': message.senderName,
-'senderId': message.senderId,
-'text': null,
-'photoUrl': photoUrl,
-'timestamp': DateTime.now(),
+
+      await storageUploadTask.onComplete.then((photo) async {
+        await photo.ref.getDownloadURL().then((photoUrl) async {
+          await messageRef.setData({
+            'senderName': message.senderName,
+            'senderId': message.senderId,
+            'text': null,
+            'photoUrl': photoUrl,
+            'timestamp': DateTime.now(),
           });
         });
       });
+
       senderRef
-          .doc(messageRef.id)
-          .set({'timestamp': DateTime.now()});
+          .document(messageRef.documentID)
+          .setData({'timestamp': DateTime.now()});
+
       sendUserRef
-          .doc(messageRef.id)
-          .set({'timestamp': DateTime.now()});
-await _firestore
+          .document(messageRef.documentID)
+          .setData({'timestamp': DateTime.now()});
+
+      await _firestore
           .collection('users')
-          .doc(message.senderId)
+          .document(message.senderId)
           .collection('chats')
-          .doc(message.selectedUserId)
-          .update({'timestamp': DateTime.now()});
-await _firestore
+          .document(message.selectedUserId)
+          .updateData({'timestamp': DateTime.now()});
+
+      await _firestore
           .collection('users')
-          .doc(message.selectedUserId)
+          .document(message.selectedUserId)
           .collection('chats')
-          .doc(message.senderId)
-          .update({'timestamp': DateTime.now()});
+          .document(message.senderId)
+          .updateData({'timestamp': DateTime.now()});
     }
-if (message.text != null) {
-await messageRef.set({
-'senderName': message.senderName,
-'senderId': message.senderId,
-'text': message.text,
-'photoUrl': null,
-'timestamp': DateTime.now(),
+    if (message.text != null) {
+      await messageRef.setData({
+        'senderName': message.senderName,
+        'senderId': message.senderId,
+        'text': message.text,
+        'photoUrl': null,
+        'timestamp': DateTime.now(),
       });
+
       senderRef
-          .doc(messageRef.id)
-          .set({'timestamp': DateTime.now()});
+          .document(messageRef.documentID)
+          .setData({'timestamp': DateTime.now()});
+
       sendUserRef
-          .doc(messageRef.id)
-          .set({'timestamp': DateTime.now()});
-await _firestore
+          .document(messageRef.documentID)
+          .setData({'timestamp': DateTime.now()});
+
+      await _firestore
           .collection('users')
-          .doc(message.senderId)
+          .document(message.senderId)
           .collection('chats')
-          .doc(message.selectedUserId)
-          .update({'timestamp': DateTime.now()});
-await _firestore
+          .document(message.selectedUserId)
+          .updateData({'timestamp': DateTime.now()});
+
+      await _firestore
           .collection('users')
-          .doc(message.selectedUserId)
+          .document(message.selectedUserId)
           .collection('chats')
-          .doc(message.senderId)
-          .update({'timestamp': DateTime.now()});
+          .document(message.senderId)
+          .updateData({'timestamp': DateTime.now()});
     }
   }
-Stream<QuerySnapshot> getMessages({currentUserId, selectedUserId}) {
-return _firestore
+
+  Stream<QuerySnapshot> getMessages({currentUserId, selectedUserId}) {
+    return _firestore
         .collection('users')
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('chats')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .collection('messages')
         .orderBy('timestamp', descending: false)
         .snapshots();
   }
-Future<Message> getMessageDetail({messageId}) async {
-Message _message = Message();
-await _firestore
+
+  Future<Message> getMessageDetail({messageId}) async {
+    Message _message = Message();
+
+    await _firestore
         .collection('messages')
-        .doc(messageId)
+        .document(messageId)
         .get()
         .then((message) {
-      _message.senderId = message.data()['senderId'];
-      _message.senderName = message.data()['senderName'];
-      _message.timestamp = message.data()['timestamp'];
-      _message.text = message.data()['text'];
-      _message.photoUrl = message.data()['photoUrl'];
+      _message.senderId = message['senderId'];
+      _message.senderName = message['senderName'];
+      _message.timestamp = message['timestamp'];
+      _message.text = message['text'];
+      _message.photoUrl = message['photoUrl'];
     });
-return _message;
+
+    return _message;
   }
 }

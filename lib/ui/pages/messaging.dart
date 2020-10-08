@@ -129,7 +129,7 @@ class _MessagingState extends State<Messaging> {
                             fontSize: 16.0, fontWeight: FontWeight.bold),
                       );
                     }
-                    if (snapshot.data.docs.isNotEmpty) {
+                    if (snapshot.data.documents.isNotEmpty) {
                       return Expanded(
                         child: Column(
                           children: <Widget>[
@@ -140,10 +140,10 @@ class _MessagingState extends State<Messaging> {
                                   return MessageWidget(
                                     currentUserId: widget.currentUser.uid,
                                     messageId: snapshot
-                                        .data.docs[index].id,
+                                        .data.documents[index].documentID,
                                   );
                                 },
-                                itemCount: snapshot.data.docs.length,
+                                itemCount: snapshot.data.documents.length,
                               ),
                             )
                           ],

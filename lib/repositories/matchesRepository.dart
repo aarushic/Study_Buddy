@@ -2,15 +2,15 @@ import 'package:Study_Buddy/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MatchesRepository {
-  final FirebaseFirestore _firestore;
+  final Firestore _firestore;
 
-  MatchesRepository({FirebaseFirestore firestore})
-      : _firestore = firestore ?? FirebaseFirestore.instance;
+  MatchesRepository({Firestore firestore})
+      : _firestore = firestore ?? Firestore.instance;
 
   Stream<QuerySnapshot> getMatchedList(userId) {
     return _firestore
         .collection('users')
-        .doc(userId)
+        .document(userId)
         .collection('matchedList')
         .snapshots();
   }
@@ -18,7 +18,7 @@ class MatchesRepository {
   Stream<QuerySnapshot> getSelectedList(userId) {
     return _firestore
         .collection('users')
-        .doc(userId)
+        .document(userId)
         .collection('selectedList')
         .snapshots();
   }
@@ -26,15 +26,14 @@ class MatchesRepository {
   Future<User> getUserDetails(userId) async {
     User _user = User();
 
-    await _firestore.collection('users').doc(userId).get().then((user) {
-      var identifier = user.data();
-      _user.uid = user.id;
-      _user.name = identifier['name'];
-      _user.photo = identifier['photoUrl'];
-      _user.age = identifier['age'];
-      _user.location = identifier['location'];
-      _user.gender = identifier['gender'];
-      _user.subject = identifier['subject'];
+    await _firestore.collection('users').document(userId).get().then((user) {
+      _user.uid = user.documentID;
+      _user.name = user['name'];
+      _user.photo = user['photoUrl'];
+      _user.age = user['age'];
+      _user.location = user['location'];
+      _user.gender = user['gender'];
+      _user.subject = user['subject'];
     });
 
     return _user;
@@ -43,39 +42,39 @@ class MatchesRepository {
   Future openChat({currentUserId, selectedUserId}) async {
     await _firestore
         .collection('users')
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('chats')
-        .doc(selectedUserId)
-        .set({'timestamp': DateTime.now()});
+        .document(selectedUserId)
+        .setData({'timestamp': DateTime.now()});
 
     await _firestore
         .collection('users')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .collection('chats')
-        .doc(currentUserId)
-        .set({'timestamp': DateTime.now()});
+        .document(currentUserId)
+        .setData({'timestamp': DateTime.now()});
 
     await _firestore
         .collection('users')
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('matchedList')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .delete();
 
     await _firestore
         .collection('users')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .collection('matchedList')
-        .doc(currentUserId)
+        .document(currentUserId)
         .delete();
   }
 
   void deleteUser(currentUserId, selectedUserId) async {
     return await _firestore
         .collection('users')
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('selectedList')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .delete();
   }
 
@@ -85,20 +84,20 @@ class MatchesRepository {
 
     await _firestore
         .collection('users')
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('matchedList')
-        .doc(selectedUserId)
-        .set({
+        .document(selectedUserId)
+        .setData({
       'name': selectedUserName,
       'photoUrl': selectedUserPhotoUrl,
     });
 
     return await _firestore
         .collection('users')
-        .doc(selectedUserId)
+        .document(selectedUserId)
         .collection('matchedList')
-        .doc(currentUserId)
-        .set({
+        .document(currentUserId)
+        .setData({
       'name': currentUserName,
       'photoUrl': currentUserPhotoUrl,
     });

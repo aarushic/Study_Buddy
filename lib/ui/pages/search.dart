@@ -28,7 +28,7 @@ class _SearchState extends State<Search> {
   int difference;
 
   getDifference(GeoPoint userLocation) async {
-    //Position position = await Geolocator().getCurrentPosition();
+    Position position = await Geolocator().getCurrentPosition();
 
     double location = await Geolocator().distanceBetween(37.785834,
         -122.406417, 37.785834, -122.406417);
@@ -52,7 +52,7 @@ class _SearchState extends State<Search> {
       builder: (context, state) {
         if (state is InitialSearchState) {
           _searchBloc.add(
-            LoadUserEvent(widget.userId),
+           LoadUserEvent(userId: widget.userId),
           );
           return Center(
             child: CircularProgressIndicator(
@@ -157,10 +157,10 @@ class _SearchState extends State<Search> {
                         iconWidget(FontAwesomeIcons.heart, () {
                           _searchBloc.add(
                             SelectUserEvent(
-                                _currentUser.name,
-                                _currentUser.photo,
-                                widget.userId,
-                                _user.uid),
+                                name: _currentUser.name,
+                                photoUrl: _currentUser.photo,
+                                currentUserId: widget.userId,
+                                selectedUserId: _user.uid),
                           );
                         }, size.height * 0.06, Colors.red[400]),
                         iconWidget(EvaIcons.options2, () {}, size.height * 0.04,
