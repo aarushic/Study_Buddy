@@ -26,6 +26,7 @@ class ProfileForm extends StatefulWidget {
 
 class _ProfileFormState extends State<ProfileForm> {
   final TextEditingController _nameController = TextEditingController();
+  
 
   String gender, subject;
   DateTime age;
@@ -37,6 +38,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   bool get isFilled =>
       _nameController.text.isNotEmpty &&
+  
       gender != null &&
       subject != null &&
       photo != null &&
