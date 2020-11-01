@@ -75,29 +75,35 @@ class _MessagingState extends State<Messaging> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-        elevation: size.height * 0.02,
+      appBar: PreferredSize(
+      preferredSize: Size.fromHeight(70),
+        child: AppBar(backgroundColor: Colors.cyan[400],
+        elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             ClipOval(
               child: Container(
-                height: size.height * 0.06,
-                width: size.height * 0.06,
+                height: size.height * 0.05,
+                width: size.height * 0.05,
                 child: PhotoWidget(
                   photoLink: widget.selectedUser.photo,
                 ),
               ),
+           
             ),
+          
             SizedBox(
-              width: size.width * 0.03,
+              width: size.width * 0.04,
             ),
             Expanded(
               child: Text(widget.selectedUser.name),
             ),
           ],
+          
         ),
+        
+      ),
       ),
       body: BlocBuilder<MessagingBloc, MessagingState>(
         bloc: _messagingBloc,
@@ -124,9 +130,9 @@ class _MessagingState extends State<Messaging> {
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return Text(
-                        "Start the conversation?",
+                        "s",
                         style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.bold),
+                            fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.grey[300], fontFamily: 'Rubik-Regular'),
                       );
                     }
                     if (snapshot.data.documents.isNotEmpty) {
@@ -154,7 +160,7 @@ class _MessagingState extends State<Messaging> {
                         child: Text(
                           "Start the conversation ?",
                           style: TextStyle(
-                              fontSize: 16.0, fontWeight: FontWeight.bold),
+                              fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.grey[50], fontFamily: 'Rubik-Regular'),
                         ),
                       );
                     }
@@ -162,8 +168,8 @@ class _MessagingState extends State<Messaging> {
                 ),
                 Container(
                   width: size.width,
-                  height: size.height * 0.06,
-                  color: backgroundColor,
+                  height: size.height * 0.09,
+                  color: Colors.cyan[500],
                   child: Row(
                     children: <Widget>[
                       GestureDetector(
@@ -209,7 +215,7 @@ class _MessagingState extends State<Messaging> {
                               maxLines: null,
                               decoration: null,
                               textAlignVertical: TextAlignVertical.center,
-                              cursorColor: backgroundColor,
+                              cursorColor: Colors.cyan[500],
                               textCapitalization: TextCapitalization.sentences,
                             ),
                           ),
@@ -223,7 +229,7 @@ class _MessagingState extends State<Messaging> {
                           child: Icon(
                             Icons.send,
                             size: size.height * 0.04,
-                            color: isValid ? Colors.white : Colors.grey,
+                            color: isValid ? Colors.white : Colors.white,
                           ),
                         ),
                       )

@@ -4,7 +4,7 @@ import 'package:Study_Buddy/repositories/matchesRepository.dart';
 import 'package:Study_Buddy/ui/widgets/iconWidget.dart';
 import 'package:Study_Buddy/ui/widgets/pageTurn.dart';
 import 'package:Study_Buddy/ui/widgets/profile.dart';
-import 'package:Study_Buddy/ui/widgets/userGender.dart';
+import 'package:Study_Buddy/ui/widgets/userSubject.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,10 +59,10 @@ class _MatchesState extends State<Matches> {
             slivers: <Widget>[
               SliverAppBar(
                 pinned: true,
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.grey[50],
                 title: Text(
-                  "Matched User",
-                  style: TextStyle(color: Colors.black, fontSize: 30.0),
+                  "your friends",
+                  style: TextStyle(color: Colors.grey[700], fontSize: 30.0, fontFamily: 'Rubik-Regular'),
                 ),
               ),
               StreamBuilder<QuerySnapshot>(
@@ -97,53 +97,47 @@ class _MatchesState extends State<Matches> {
                                     photoWidth: size.width,
                                     clipRadius: size.height * 0.01,
                                     containerWidth: size.width,
-                                    containerHeight: size.height * 0.2,
+                                    containerHeight: size.height * 0.28,
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: size.height * 0.02),
                                       child: ListView(
                                         children: <Widget>[
                                           SizedBox(
-                                            height: size.height * 0.02,
+                                            height: size.height * 0.0,
                                           ),
                                           Row(
                                             children: <Widget>[
-                                              userGender(selectedUser.gender),
+
                                               Expanded(
                                                 child: Text(
                                                   " " +
                                                       selectedUser.name +
                                                       ", " +
-                                                      (DateTime.now().year -
-                                                              selectedUser.age
-                                                                  .toDate()
-                                                                  .year)
-                                                          .toString(),
+                                                      selectedUser.gender,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize:
-                                                          size.height * 0.05),
+                                                          size.height * 0.05, fontFamily: 'Rubik-Regular'),
                                                 ),
                                               )
                                             ],
                                           ),
+                                          Container(
+                                            height: 8,
+                                          ),
                                           Row(
                                             children: <Widget>[
-                                              Icon(
-                                                Icons.location_on,
-                                                color: Colors.white,
-                                              ),
-                                              Text(
-                                                difference != null
-                                                    ? (difference / 1000)
-                                                            .floor()
-                                                            .toString() +
-                                                        " km away"
-                                                    : "away",
+                                              
+                                              Flexible(
+                                                child: Text(
+                                                " " + selectedUser.info,
                                                 style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.white, fontSize: size.width * .06, fontFamily: 'Rubik-Regular'
                                                 ),
                                               )
+                                                ),
+                                              
                                             ],
                                           ),
                                           SizedBox(
@@ -185,16 +179,16 @@ class _MatchesState extends State<Matches> {
                               );
                             },
                             child: profileWidget(
-                              padding: size.height * 0.01,
+                               padding: size.height * 0.01,
                               photo: user[index].data['photoUrl'],
-                              photoWidth: size.width * 0.5,
-                              photoHeight: size.height * 0.3,
+                              photoWidth: size.width * 0.8,
+                              photoHeight: size.height * 0.8,
                               clipRadius: size.height * 0.01,
-                              containerHeight: size.height * 0.03,
-                              containerWidth: size.width * 0.5,
+                              containerHeight: size.height * 0.08,
+                              containerWidth: size.width * 0.8,
                               child: Text(
-                                "  " + user[index].data['name'],
-                                style: TextStyle(color: Colors.white),
+                                 "              " + "Tom",
+                                style: TextStyle(color: Colors.white, fontSize: size.width * .09, fontFamily: 'Rubik-Regular'),
                               ),
                             ),
                           );
@@ -202,7 +196,7 @@ class _MatchesState extends State<Matches> {
                         childCount: user.length,
                       ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                        crossAxisCount: 1,
                       ),
                     );
                   } else {
@@ -212,12 +206,13 @@ class _MatchesState extends State<Matches> {
                   }
                 },
               ),
+              
               SliverAppBar(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.grey[50],
                 pinned: true,
                 title: Text(
-                  "Someone Likes You",
-                  style: TextStyle(color: Colors.black, fontSize: 30),
+                  "friend requests!",
+                  style: TextStyle(color: Colors.grey[700], fontSize: 30, fontFamily: 'Rubik-Regular'),
                 ),
               ),
               StreamBuilder<QuerySnapshot>(
@@ -250,10 +245,10 @@ class _MatchesState extends State<Matches> {
                                     padding: size.height * 0.01,
                                     photo: selectedUser.photo,
                                     photoHeight: size.height,
-                                    photoWidth: size.width,
+                                    photoWidth: size.width * 4,
                                     clipRadius: size.height * 0.01,
                                     containerWidth: size.width,
-                                    containerHeight: size.height * 0.2,
+                                    containerHeight: size.height * 0.45,
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: size.height * 0.02),
@@ -265,32 +260,63 @@ class _MatchesState extends State<Matches> {
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 SizedBox(
-                                                  height: size.height * 0.01,
+                                                  height: size.height * 0.0,
                                                 ),
                                                 Row(
                                                   children: <Widget>[
-                                                    userGender(
-                                                        selectedUser.gender),
+                                                    
                                                     Expanded(
                                                       child: Text(
-                                                        " " +
+                                                        "    " +
                                                             selectedUser.name +
                                                             ", " +
-                                                            (DateTime.now()
-                                                                        .year -
-                                                                    selectedUser
-                                                                        .age
-                                                                        .toDate()
-                                                                        .year)
-                                                                .toString(),
+                                                            selectedUser.gender,
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize:
                                                                 size.height *
-                                                                    0.05),
+                                                                    0.05, fontFamily: 'Rubik-Regular'),
                                                       ),
                                                     )
                                                   ],
+                                                ),
+                                                Container(
+                                                  height: 13,
+                                                ),
+                                                Row(
+                                                  children: <Widget>[
+                                                    Text(
+                                                      "                "
+                                                      ),
+                                                    userSubject(
+                                                        selectedUser.subject
+                                                    ),
+                                                    Text(
+                                                      " " + selectedUser.subject,
+                                                      style: TextStyle(
+                                                        color: Colors.white,fontSize: size.width * .08, fontFamily: 'Rubik-Regular'
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                  Container(
+                                                  height: 13,
+                                                ),
+                                                Row(
+                                                  children: <Widget>[
+                                                    Flexible(
+                                                      child: Text(
+                                                       selectedUser.info,
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: size.height * 0.028, fontFamily: 'Rubik-Regular'),
+                                                      overflow: TextOverflow.clip,
+                                                    )
+                                                    ),
+                                                    ],
+                                                ),
+                                                  Container(
+                                                  height: 20,
                                                 ),
                                                 Row(
                                                   children: <Widget>[
@@ -306,13 +332,14 @@ class _MatchesState extends State<Matches> {
                                                               " km away"
                                                           : "away",
                                                       style: TextStyle(
-                                                        color: Colors.white,
+                                                        color: Colors.white,fontSize: size.width*.05, fontFamily: 'Rubik-Regular'
                                                       ),
                                                     ),
                                                   ],
                                                 ),
+
                                                 SizedBox(
-                                                  height: size.height * 0.01,
+                                                  height: size.height * 0.04,
                                                 ),
                                                 Row(
                                                   mainAxisAlignment:
@@ -330,13 +357,13 @@ class _MatchesState extends State<Matches> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     }, size.height * 0.08,
-                                                        Colors.blue),
+                                                        Colors.yellow[200]),
                                                     SizedBox(
                                                       width: size.width * 0.05,
                                                     ),
                                                     iconWidget(
                                                         FontAwesomeIcons
-                                                            .solidHeart, () {
+                                                            .heart, () {
                                                       _matchesBloc.add(
                                                         AcceptUserEvent(
                                                             selectedUser:
@@ -376,22 +403,24 @@ class _MatchesState extends State<Matches> {
                             child: profileWidget(
                               padding: size.height * 0.01,
                               photo: user[index].data['photoUrl'],
-                              photoWidth: size.width * 0.5,
-                              photoHeight: size.height * 0.3,
+                              photoWidth: size.width * 0.8,
+                              photoHeight: size.height * 0.8,
                               clipRadius: size.height * 0.01,
-                              containerHeight: size.height * 0.03,
-                              containerWidth: size.width * 0.5,
+                              containerHeight: size.height * 0.08,
+                              containerWidth: size.width * 0.8,
+                    
                               child: Text(
-                                "  " + user[index].data['name'],
-                                style: TextStyle(color: Colors.white),
+                                "              " + user[index].data['name'],
+                                style: TextStyle(color: Colors.white, fontSize: size.width * .09, fontFamily: 'Rubik-Regular'),
                               ),
                             ),
+
                           );
                         },
                         childCount: user.length,
                       ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2),
+                          crossAxisCount: 1),
                     );
                   } else
                     return SliverToBoxAdapter(
@@ -407,3 +436,4 @@ class _MatchesState extends State<Matches> {
     );
   }
 }
+

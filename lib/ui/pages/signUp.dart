@@ -16,9 +16,9 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold( 
       appBar: AppBar( 
-        title: Text("Welcome", style: TextStyle(fontSize: 25.0)),
-        backgroundColor: Colors.indigoAccent[200],
-        elevation: 1,
+        title: Text("studdy", style: TextStyle(fontSize: 23.0)),
+        backgroundColor: Colors.purple[200],
+        elevation: 0,
       ),
        body: BlocProvider<SignUpBloc>(
         create: (context) =>  SignUpBloc(userRepository: _userRepository,),

@@ -26,7 +26,7 @@ class ProfileForm extends StatefulWidget {
 
 class _ProfileFormState extends State<ProfileForm> {
   final TextEditingController _nameController = TextEditingController();
-  
+  final TextEditingController _infoController = TextEditingController();
 
   String gender, subject;
   DateTime age;
@@ -38,7 +38,7 @@ class _ProfileFormState extends State<ProfileForm> {
 
   bool get isFilled =>
       _nameController.text.isNotEmpty &&
-  
+      _infoController.text.isNotEmpty &&
       gender != null &&
       subject != null &&
       photo != null &&
@@ -60,6 +60,7 @@ class _ProfileFormState extends State<ProfileForm> {
     _profileBloc.add(
       Submitted(
           name: _nameController.text,
+          info: _infoController.text,
           age: age,
           location: location,
           gender: gender,
@@ -78,6 +79,7 @@ class _ProfileFormState extends State<ProfileForm> {
   @override
   void dispose() {
     _nameController.dispose();
+    _infoController.dispose();
     super.dispose();
   }
 
@@ -136,6 +138,9 @@ class _ProfileFormState extends State<ProfileForm> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
+                    height: 40,
+                  ),
+                  Container(
                     width: size.width,
                     child: CircleAvatar(
                       radius: size.width * 0.3,
@@ -170,6 +175,9 @@ class _ProfileFormState extends State<ProfileForm> {
                             ),
                     ),
                   ),
+                  Container(
+                        height: 11,
+                      ),
                   textFieldWidget(_nameController, "Name", size),
                   GestureDetector(
                     onTap: () {
@@ -186,14 +194,16 @@ class _ProfileFormState extends State<ProfileForm> {
                         },
                       );
                     },
+                 
                     child: Text(
                       "Enter Birthday",
                       style: TextStyle(
-                          color: Colors.indigoAccent[200], fontSize: size.width * 0.07),
+                          color: Colors.cyan[900], fontSize: size.width * 0.07),
                     ),
                   ),
+              
                   SizedBox(
-                    height: 20.0,
+                    height: 23.0,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,10 +212,13 @@ class _ProfileFormState extends State<ProfileForm> {
                         padding: EdgeInsets.symmetric(
                             horizontal: size.height * 0.02),
                         child: Text(
-                          "Your Grade",
+                          "Grade",
                           style: TextStyle(
-                              color: Colors.indigoAccent[200], fontSize: size.width * 0.07),
+                              color: Colors.cyan[900], fontSize: size.width * 0.07),
                         ),
+                      ),
+                      Container(
+                        height: 15,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -257,41 +270,44 @@ class _ProfileFormState extends State<ProfileForm> {
                         child: Text(
                           "Subject",
                           style: TextStyle(
-                              color: Colors.indigoAccent[200], fontSize: size.width * 0.07),
+                              color: Colors.cyan[900], fontSize: size.width * 0.07),
                         ),
+                      ),
+                      Container(
+                        height: 11,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          subjectWidget(FontAwesomeIcons.plus, "Math", size,
+                          subjectWidget(FontAwesomeIcons.divide, "math", size,
                               subject, () {
                             setState(() {
-                              subject = "Math";
+                              subject = "math";
                             });
                           }),
                           subjectWidget(
-                              FontAwesomeIcons.flask, "Science", size, subject,
+                              FontAwesomeIcons.flask, "science", size, subject,
                               () {
                             setState(() {
-                              subject = "Science";
+                              subject = "science";
                             });
                           }),
                           subjectWidget(
-                              FontAwesomeIcons.book, "English", size, subject,
+                              FontAwesomeIcons.book, "english", size, subject,
                               () {
                             setState(() {
-                              subject = "English";
+                              subject = "english";
                             });
                           }),
                           subjectWidget(
-                            FontAwesomeIcons.globe,
-                            "History",
+                            FontAwesomeIcons.globeAmericas,
+                            "history",
                             size,
                             subject,
                             () {
                               setState(
                                 () {
-                                  subject = "History";
+                                  subject = "history";
                                 },
                               );
                             },
@@ -300,6 +316,10 @@ class _ProfileFormState extends State<ProfileForm> {
                       ),
                     ],
                   ),
+                  Container(
+                    height: 15,
+                  ),
+                  textFieldWidget(_infoController, "Info", size),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: size.height * 0.02),
                     child: GestureDetector(
@@ -313,8 +333,8 @@ class _ProfileFormState extends State<ProfileForm> {
                         height: size.height * 0.06,
                         decoration: BoxDecoration(
                           color: isButtonEnabled(state)
-                              ? Colors.indigoAccent[200]
-                              : Colors.indigoAccent[100],
+                              ? Colors.cyan[900]
+                              : Colors.cyan[600],
                           borderRadius:
                               BorderRadius.circular(size.height * 0.05),
                         ),
@@ -346,12 +366,12 @@ Widget textFieldWidget(controller, text, size) {
       decoration: InputDecoration(
         labelText: text,
         labelStyle:
-            TextStyle(color: Colors.indigoAccent[200], fontSize: size.height * 0.03),
+            TextStyle(color: Colors.cyan[900], fontSize: size.height * 0.03),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.indigoAccent[200], width: 1.0),
+          borderSide: BorderSide(color: Colors.cyan[900], width: 2.0),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.indigoAccent[200], width: 1.0),
+          borderSide: BorderSide(color: Colors.cyan[900], width: 2.0),
         ),
       ),
     ),

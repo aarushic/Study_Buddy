@@ -94,6 +94,24 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+
+  fonts:
+      - family: Poppins
+        fonts:
+          - asset: fonts/Poppins-ExtraLight.ttf
+      - family: PTSans
+        fonts:
+          - asset: fonts/PTSans-Regular.ttf
+      - family: Rubik-Regular
+        fonts:
+          - asset: fonts/Rubik-Regular.ttf 
+          - asset: fonts/Rubik-Light.ttf
+      - family:  MyFlutterApp
+        fonts:
+          - asset: fonts/MyFlutterApp.ttf
+
+          
+        
   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

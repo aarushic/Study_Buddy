@@ -3,9 +3,11 @@ import 'package:Study_Buddy/bloc/authentication/authentication_event.dart';
 import 'package:Study_Buddy/bloc/login/bloc.dart';
 import 'package:Study_Buddy/repositories/userRepository.dart';
 import 'package:Study_Buddy/ui/constants.dart';
+import 'package:Study_Buddy/ui/pages/my_flutter_app_icons.dart';
 import 'package:Study_Buddy/ui/pages/signUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class LoginForm extends StatefulWidget {
   final UserRepository _userRepository;
@@ -120,27 +122,44 @@ class _LoginFormState extends State<LoginForm> {
               color: Colors.white,
               width: size.width,
               height: size.height,
+              
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                   Container(
+                    child: Image(
+                    
+                      image: NetworkImage('https://i.ibb.co/YNdTxPk/IMG-0586.png'),
+                      height: 300,
+                      width: 500,
+                      
+                    ),
+                  ),
+                  
                   Center(
+                  
                     child: Text(
-                      "Welcome!",
+                      "studdy",
                       
                       style: TextStyle(
-                          fontSize: size.width * 0.13, color: Colors.grey[700], fontWeight: FontWeight.w300),
+                          fontSize: size.width * 0.13, color: Colors.grey[600], fontFamily: 'Rubik-Regular'),
                     ),
                   ),
+                 
                   Container(
+                    
                     width: size.width * 0.8,
                     child: Divider(
-                      height: size.height * 0.05,
+                      height: size.height * 0.04,
                       color: Colors.white,
                     ),
+                    
                   ),
+                  
                   Padding(
-                    padding: EdgeInsets.all(size.height * 0.02),
+                    padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 27.0),
+                   
                     child: TextFormField(
                       controller: _emailController,
                       autovalidate: true,
@@ -148,7 +167,7 @@ class _LoginFormState extends State<LoginForm> {
                         return !state.isEmailValid ? "Invalid Email" : null;
                       },
                       decoration: InputDecoration(
-                        labelText: "Email",
+                        labelText: "email",
                         labelStyle: TextStyle(
                             color: Colors.grey[700], fontSize: size.height * 0.03),
                         focusedBorder: OutlineInputBorder(
@@ -163,7 +182,7 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(size.height * 0.02),
+                    padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 27.0),
                     child: TextFormField(
                       controller: _passwordController,
                       autocorrect: false,
@@ -175,7 +194,7 @@ class _LoginFormState extends State<LoginForm> {
                             : null;
                       },
                       decoration: InputDecoration(
-                        labelText: "Password",
+                        labelText: "password",
                         labelStyle: TextStyle(
                             color: Colors.grey[700], fontSize: size.height * 0.03),
                         focusedBorder: OutlineInputBorder(
@@ -202,14 +221,14 @@ class _LoginFormState extends State<LoginForm> {
                             height: size.height * 0.06,
                             decoration: BoxDecoration(
                               color: isLoginButtonEnabled(state)
-                                  ? Colors.indigoAccent[200]
-                                  : Colors.indigoAccent[100],
+                                  ? Colors.purple[200]
+                                  : Colors.purple[100],
                               borderRadius:
                                   BorderRadius.circular(size.height * 0.05),
                             ),
                             child: Center(
                               child: Text(
-                                "Login",
+                                "Find your Study Buddy!",
                                 style: TextStyle(
                                     fontSize: size.height * 0.025,
                                     color: Colors.white),
@@ -236,7 +255,7 @@ class _LoginFormState extends State<LoginForm> {
                             "Are you new? Sign up!",
                             style: TextStyle(
                                 fontSize: size.height * 0.025,
-                                color: Colors.indigoAccent[400]),
+                                color: Colors.purple[300]),
                           ),
                         )
                       ],

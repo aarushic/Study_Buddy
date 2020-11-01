@@ -20,6 +20,7 @@ class AcceptUserEvent extends MatchesEvent {
   final String currentUser,
       selectedUser,
       selectedUserName,
+      selectedUserInfo,
       selectedUserPhotoUrl,
       currentUserName,
       currentUserPhotoUrl;
@@ -28,6 +29,7 @@ class AcceptUserEvent extends MatchesEvent {
       {this.currentUser,
       this.selectedUser,
       this.selectedUserName,
+      this.selectedUserInfo,
       this.selectedUserPhotoUrl,
       this.currentUserName,
       this.currentUserPhotoUrl});
@@ -37,6 +39,7 @@ class AcceptUserEvent extends MatchesEvent {
         currentUser,
         selectedUser,
         selectedUserName,
+        this.selectedUserInfo,
         selectedUserPhotoUrl,
         currentUserName,
         currentUserPhotoUrl

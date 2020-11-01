@@ -34,6 +34,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
       yield* _mapAcceptUserToState(
         currentUserId: event.currentUser,
         selectedUserId: event.selectedUser,
+        selectedUserInfo: event.selectedUserInfo,
         currentUserName: event.currentUserName,
         currentUserPhotoUrl: event.currentUserPhotoUrl,
         selectedUserName: event.selectedUserName,
@@ -71,6 +72,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
       String currentUserName,
       String currentUserPhotoUrl,
       String selectedUserName,
+      String selectedUserInfo,
       String selectedUserPhotoUrl}) async* {
     await _matchesRepository.selectUser(
         currentUserId,
@@ -78,6 +80,7 @@ class MatchesBloc extends Bloc<MatchesEvent, MatchesState> {
         currentUserName,
         currentUserPhotoUrl,
         selectedUserName,
+        selectedUserInfo,
         selectedUserPhotoUrl);
   }
 }

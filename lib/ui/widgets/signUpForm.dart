@@ -108,7 +108,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     children: <Widget>[
                       Center(
                         child: Text("Sign Up", style: TextStyle(
-                          fontSize: size.width * 0.13, color: Colors.grey[700], fontWeight: FontWeight.w300),
+                          fontSize: size.width * 0.13, color: Colors.grey[700], fontFamily: 'Rubik-Regular'),
                     ),
                       ),
                       Container(
@@ -119,7 +119,7 @@ class _SignUpFormState extends State<SignUpForm> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(size.height *.02),
+                         padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 27.0),
                         child: TextFormField(
                           controller: _emailController,
                           autovalidate: true,
@@ -127,7 +127,7 @@ class _SignUpFormState extends State<SignUpForm> {
                             return !state.isEmailValid ? "Invalid Email" : null;
                           },
                           decoration: InputDecoration(
-                            labelText: "Email",
+                            labelText: "email",
                             labelStyle: TextStyle(
                             color: Colors.grey[700], fontSize: size.height * 0.03),
                         focusedBorder: OutlineInputBorder(
@@ -143,7 +143,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       ),
 
                       Padding(
-                        padding: EdgeInsets.all(size.height *.02),
+                         padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 27.0),
                         child: TextFormField(
                           controller: _passwordController,
                           autovalidate: true,
@@ -153,7 +153,7 @@ class _SignUpFormState extends State<SignUpForm> {
                             return !state.isPasswordValid ? "Invalid Password" : null;
                           },
                           decoration: InputDecoration(
-                            labelText: "Password",
+                            labelText: "password",
                             labelStyle: TextStyle(
                             color: Colors.grey[700], fontSize: size.height * 0.03),
                         focusedBorder: OutlineInputBorder(
@@ -176,7 +176,7 @@ class _SignUpFormState extends State<SignUpForm> {
                             width: size.width *0.8,
                             height: size.height *.06,
                             decoration: BoxDecoration( 
-                              color: isSignUpButtonEnabled(state) ? Colors.indigoAccent[200]: Colors.indigoAccent[100],
+                              color: isSignUpButtonEnabled(state) ? Colors.purple[200]: Colors.purple[100],
                               borderRadius: BorderRadius.circular(size.height * .05),
                             ),
                             child: Center(
@@ -184,7 +184,7 @@ class _SignUpFormState extends State<SignUpForm> {
                                 "Sign Up", 
                                 style: TextStyle( 
                                   fontSize: size.height * .025,
-                                  color: Colors.white
+                                  color: Colors.white, fontFamily: 'Rubik-Regular'
                                 ),
                               ),
                             ),

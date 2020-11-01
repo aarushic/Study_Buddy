@@ -6,25 +6,25 @@ Widget userGender(gender) {
     case '9th':
       return Icon(
         FontAwesomeIcons.checkCircle,
-        color: Colors.grey[600],
+        color: Colors.cyan[300],
       );
       break;
     case '10th':
       return Icon(
         FontAwesomeIcons.checkCircle,
-        color: Colors.grey[600],
+        color: Colors.cyan[300],
       );
       break;
     case '11th':
       return Icon(
         FontAwesomeIcons.checkCircle,
-        color: Colors.grey[600],
+        color: Colors.cyan[300],
       );
       break;
     case '12th':
       return Icon(
         FontAwesomeIcons.checkCircle,
-        color: Colors.grey[600],
+        color: Colors.cyan[300],
       );
       break;
     default:

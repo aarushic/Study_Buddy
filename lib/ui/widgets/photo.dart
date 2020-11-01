@@ -10,7 +10,7 @@ class PhotoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExtendedImage.network(
       photoLink,
-      fit: BoxFit.cover,
+      fit: BoxFit.fitHeight,
       cache: true,
       enableSlideOutPage: true,
       filterQuality: FilterQuality.high,

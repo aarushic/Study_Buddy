@@ -14,17 +14,21 @@ class Login extends StatelessWidget {
         _userRepository = userRepository;
 
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: PreferredSize(
+      preferredSize: Size.fromHeight(0.000001),
+      child: AppBar(
         title: Text(
           "Study Buddy",
-          style: TextStyle(fontSize: 20.0),
+          style: TextStyle(fontSize: 2.0),
         ),
         centerTitle: true,
-        backgroundColor: Colors.indigoAccent[200],
-        elevation: 2,
-      ),
+        backgroundColor: Colors.white,
+        
+        elevation: 0,
+      ),),
       body: BlocProvider<LoginBloc>(
         create: (context) => LoginBloc(
           userRepository: _userRepository,

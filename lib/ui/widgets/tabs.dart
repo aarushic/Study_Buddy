@@ -30,7 +30,7 @@ class Tabs extends StatelessWidget {
 
     return Theme(
       data: ThemeData(
-        primaryColor: Colors.indigoAccent[100],
+        primaryColor: Colors.purple[200],
         accentColor: Colors.white,
       ),
       child: DefaultTabController(
@@ -38,13 +38,15 @@ class Tabs extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
+            elevation: 0,
             title: Text(
-              "Study Buddy",
-              style: TextStyle(fontSize: 25.0),
+              "studdy",
+              style: TextStyle(fontSize: 25.0, color: Colors.white, fontFamily: 'Rubik-Regular',),
+              
             ),
             actions: <Widget>[
               IconButton(
-                icon: Icon(Icons.exit_to_app),
+                icon: Icon(Icons.exit_to_app, color: Colors.white),
                 onPressed: () {
                   BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
                 },
@@ -60,9 +62,9 @@ class Tabs extends StatelessWidget {
                   children: <Widget>[
                     TabBar(
                       tabs: <Widget>[
-                        Tab(icon: Icon(Icons.search)),
-                        Tab(icon: Icon(Icons.people)),
-                        Tab(icon: Icon(Icons.chat)),
+                        Tab(icon: Icon(Icons.search, color: Colors.white,)),
+                        Tab(icon: Icon(Icons.people, color: Colors.white)),
+                        Tab(icon: Icon(Icons.chat, color: Colors.white)),
                       ],
                     )
                   ],

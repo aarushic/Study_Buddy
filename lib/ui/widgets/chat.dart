@@ -159,7 +159,7 @@ class _ChatWidgetState extends State<ChatWidget> {
                           children: <Widget>[
                             Text(
                               user.name,
-                              style: TextStyle(fontSize: size.height * 0.03),
+                              style: TextStyle(fontSize: size.height * 0.03, fontFamily: 'Rubik-Regular', color: Colors.grey[800]),
                             ),
                             chat.lastMessage != null
                                 ? Text(
@@ -190,8 +190,8 @@ class _ChatWidgetState extends State<ChatWidget> {
                       ],
                     ),
                     chat.timestamp != null
-                        ? Text(timeago.format(chat.timestamp.toDate()))
-                        : Text(timeago.format(widget.creationTime.toDate()))
+                        ? Text(timeago.format(chat.timestamp.toDate()), style: TextStyle(fontSize: size.height * 0.023, fontFamily: 'Rubik-Regular', color: Colors.grey[800]),)
+                        : Text(timeago.format(widget.creationTime.toDate()), style: TextStyle(fontSize: size.height * 0.023, fontFamily: 'Rubik-Regular', color: Colors.grey[800]),)
                   ],
                 ),
               ),

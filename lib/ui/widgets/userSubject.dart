@@ -3,28 +3,28 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 Widget userSubject(subject) {
   switch (subject) {
-    case 'Math':
+    case 'math':
       return Icon(
-        FontAwesomeIcons.plus,
-        color: Colors.white,
+        FontAwesomeIcons.divide,
+        color: Colors.cyan[300],
       );
       break;
-    case 'Science':
+    case 'science':
       return Icon(
         FontAwesomeIcons.flask,
-        color: Colors.white,
+        color: Colors.cyan[300],
       );
       break;
-    case 'English':
+    case 'english':
       return Icon(
         FontAwesomeIcons.book,
-        color: Colors.white,
+        color: Colors.cyan[300],
       );
       break;
-    case 'History':
+    case 'history':
       return Icon(
         FontAwesomeIcons.globe,
-        color: Colors.white,
+        color: Colors.cyan[300],
       );
       break;
     default:

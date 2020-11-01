@@ -22,6 +22,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       yield* _mapNameChangedToState(event.name);
     } else if (event is AgeChanged) {
       yield* _mapAgeChangedToState(event.age);
+    } else if (event is InfoChanged) {
+      yield* _mapInfoChangedToState(event.info);
     } else if (event is GenderChanged) {
       yield* _mapGenderChangedToState(event.gender);
     } else if (event is SubjectChanged) {
@@ -35,6 +37,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       yield* _mapSubmittedToState(
           photo: event.photo,
           name: event.name,
+          info: event.info,
           gender: event.gender,
           subject: event.subject,
           userId: uid,
@@ -83,11 +86,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     );
   }
 
+  Stream<ProfileState> _mapInfoChangedToState(String info) async* {
+    yield state.update(
+      isInfoEmpty: info == null,
+    );
+  }
+
   Stream<ProfileState> _mapSubmittedToState(
       {File photo,
       String gender,
       String subject,
       String name,
+      String info,
       String userId,
       DateTime age,
       GeoPoint location,
@@ -95,7 +105,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     yield ProfileState.loading();
     try {
       await _userRepository.profileSetup(
-          photo, userId, name, gender, subject, age, location);
+          photo, userId, name, info, gender, subject, age, location);
       yield ProfileState.success();
     } catch (_) {
       yield ProfileState.failure();

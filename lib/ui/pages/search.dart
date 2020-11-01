@@ -73,13 +73,10 @@ class _SearchState extends State<Search> {
 
           getDifference(_user.location);
           if (_user.location == null) {
-            return Text(
-              "No One Here",
-              style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            );
+             
+             return Text(
+              ". ");
+        
           } else
             return profileWidget(
               padding: size.height * 0.04,
@@ -87,46 +84,71 @@ class _SearchState extends State<Search> {
               photoWidth: size.width * 0.95,
               photo: _user.photo,
               clipRadius: size.height * 0.04,
-              containerHeight: size.height * 0.3,
+              containerHeight: size.height * 0.42,
               containerWidth: size.width * 0.9,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.058),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
-                      height: size.height * 0.02,
+                      height: size.height * 0.00,
                     ),
                     Row(
                       children: <Widget>[
                         
                         Expanded(
                           child: Text(
-                            " " +
+                            "     " +
                                 _user.name +
                                 ", " +
                                 _user.gender,
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: size.height * 0.05),
+                                fontSize: size.height * 0.05, fontFamily: 'Rubik-Regular'),
                           ),
                         )
                       ],
                     ),
+                    Container(
+                     height: 7,
+                    ),
                     Row(
                       children: <Widget>[
+                        Text("               "),
                         userSubject(_user.subject),
+                         Text("  "),
                         Text(
-                           " " +
+                            
                                 _user.subject,
                                 
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: size.height * 0.04),
+                                fontSize: size.height * 0.04, fontFamily: 'Rubik-Regular'),
                         )
                       ],
                     ),
-          
+                    Container(
+                     height: 17,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Flexible(
+                        child: Text(
+                       
+                                _user.info,
+                                
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: size.height * 0.028, fontFamily: 'Rubik-Regular'),
+                            overflow: TextOverflow.clip,
+                        )
+                        ),
+                      ],
+                    ),
+                    Container(
+                     height: 20,
+                    ),
                     Row(
                       children: <Widget>[
                         Icon(
@@ -137,19 +159,18 @@ class _SearchState extends State<Search> {
                           difference != null
                               ? (difference / 1000).floor().toString() +
                                   " km away"
-                              : "0 away",
-                          style: TextStyle(color: Colors.white),
+                              : "0 km away",
+                          style: TextStyle(color: Colors.white, fontSize: size.height * 0.02, fontFamily: 'Rubik-Regular'),
                         )
                       ],
                     ),
                     SizedBox(
-                      height: size.height * 0.04,
+                      height: size.height * 0.03,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        iconWidget(EvaIcons.swapOutline, () {}, size.height * 0.04,
-                            Colors.white),
+                 
                         iconWidget(Icons.clear, () {
                           _searchBloc
                               .add(PassUserEvent(widget.userId, _user.uid));
@@ -162,9 +183,8 @@ class _SearchState extends State<Search> {
                                 currentUserId: widget.userId,
                                 selectedUserId: _user.uid),
                           );
-                        }, size.height * 0.06, Colors.red[400]),
-                        iconWidget(EvaIcons.options2, () {}, size.height * 0.04,
-                            Colors.white)
+                        }, size.height * 0.07, Colors.red[400]),
+                        
                       ],
                     )
                   ],

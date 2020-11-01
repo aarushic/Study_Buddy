@@ -66,35 +66,35 @@ class _MessageWidgetState extends State<MessageWidget> {
                             child: Container(
                               decoration: BoxDecoration(
                                 color: _message.senderId == widget.currentUserId
-                                    ? backgroundColor
+                                    ? Colors.cyan[700]
                                     : Colors.grey[400],
                                 borderRadius: _message.senderId ==
                                         widget.currentUserId
                                     ? BorderRadius.only(
                                         topLeft:
-                                            Radius.circular(size.height * 0.02),
+                                            Radius.circular(size.height * 0.04),
                                         topRight:
-                                            Radius.circular(size.height * 0.02),
+                                            Radius.circular(size.height * 0.04),
                                         bottomLeft:
-                                            Radius.circular(size.height * 0.02),
+                                            Radius.circular(size.height * 0.04),
                                       )
                                     : BorderRadius.only(
                                         topLeft:
-                                            Radius.circular(size.height * 0.02),
+                                            Radius.circular(size.height * 0.04),
                                         topRight:
-                                            Radius.circular(size.height * 0.02),
+                                            Radius.circular(size.height * 0.04),
                                         bottomRight:
-                                            Radius.circular(size.height * 0.02),
+                                            Radius.circular(size.height * 0.04),
                                       ),
                               ),
-                              padding: EdgeInsets.all(size.height * 0.01),
+                              padding: EdgeInsets.all(size.height * 0.014),
                               child: Text(
                                 _message.text,
                                 style: TextStyle(
                                     color: _message.senderId ==
                                             widget.currentUserId
                                         ? Colors.white
-                                        : Colors.black),
+                                        : Colors.black, fontFamily: 'Rubik-Regular', fontSize: size.height * .0199,),
                               ),
                             ),
                           ),

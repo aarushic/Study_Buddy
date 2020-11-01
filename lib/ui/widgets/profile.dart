@@ -14,14 +14,6 @@ Widget profileWidget(
     padding: EdgeInsets.all(padding),
     child: Container(
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black54,
-            blurRadius: 5.0,
-            spreadRadius: 0.5,
-            offset: Offset(0, 0),
-          )
-        ],
         borderRadius: BorderRadius.circular(clipRadius),
       ),
       child: Stack(
@@ -39,18 +31,7 @@ Widget profileWidget(
           ),
           Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Colors.transparent,
-                  Colors.black54,
-                  Colors.black87,
-                  Colors.black
-                ], stops: [
-                  0.1,
-                  0.2,
-                  0.4,
-                  0.9
-                ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-                color: Colors.black45,
+                
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(clipRadius),
                   bottomRight: Radius.circular(clipRadius),
